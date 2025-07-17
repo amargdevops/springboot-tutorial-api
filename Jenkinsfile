@@ -1,10 +1,10 @@
 pipeline {
     agent any
 
-   stages {
+    stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/amargdevops/springboot-tutorial-api.git'
+                git branch: 'main', url: 'https://github.com/amargdevops/springboot-tutorial-api.git'
             }
         }
 
@@ -19,16 +19,14 @@ pipeline {
                 sh 'mvn test'
             }
         }
-
-        // Optional: Add Docker build stage later
     }
 
     post {
         success {
-            echo 'Build & test completed successfully.'
+            echo '✅ Build & test completed successfully.'
         }
         failure {
-            echo 'Something went wrong...'
+            echo '❌ Something went wrong...'
         }
     }
 }
